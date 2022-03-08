@@ -1,0 +1,42 @@
+.networks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0px;
+    height: 300px;
+    margin: 0px;
+    padding-bottom: 15px;
+    background-color: lawngreen;
+    border-radius: 0px 0px 0px 20px;
+    width: 70px;
+    -webkit-box-shadow: inset 168px 162px 29px -112px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 168px 162px 29px -112px rgba(0,0,0,0.75);
+box-shadow: inset 168px 162px 29px -112px rgba(0,0,0,0.75);
+}
+        
+.facebook{
+    margin-top: 10px;
+    height: 50px;
+    width: 50px ;
+}
+.facebook:hover{
+    transition: 300ms;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+}
+.itemNet{
+    margin: 10px 0px 0px 0px;
+    height: 45px;
+    width: 45px ;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.itemNet:hover{
+    transition: 300ms;
+    cursor: pointer;
+    height: 55px;
+    width: 55px;
+}
