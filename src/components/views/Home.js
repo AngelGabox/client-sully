@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
-import Networks from '../Networks';
-import style from '../css/Home.module.css'
+import Networks from '../Networks/Networks';
+import style from './Home.module.css'
 
 
 

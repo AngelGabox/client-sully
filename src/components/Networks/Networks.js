@@ -1,17 +1,14 @@
 import React from 'react';
-import style from './css/Networks.module.css'
+import style from './Networks.module.css'
 
 const Networks = () => {
   return <div className={style.networks}>
         <a href="https://www.facebook.com/SullivanKinderGarden"  target="_blanck"><img className={style.facebook} src="data:image/png;base64,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"/></a>
-
         <a href="https://www.instagram.com/guarderiasullivan/?hl=es-la" target="_blanck"><img src="" alt="" /><img className={style.itemNet} src="https://www.pngplay.com/wp-content/uploads/1/Round-Instagram-Logo-PNG-HD-Quality.png" alt="" /></a>
-
         <a href="https://wa.me/message/UUP64GFVFBU5N1" target="_blanck" ><img className={style.itemNet} src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c543.png" alt="" /></a>
-
         <a href="mailto:kindergsullivan@gmail.com" target="_blanck"><img className={style.itemNet} src="https://snipstock.com/assets/cdn/png/a9ebc2e8be719ae99c530cf98d8a160d.png" alt="" /></a>
-
-        <a href="mailto:guarderiasullivan@hotmail.com" target="_blanck"><img className={style.itemNet} src="https://cdn.icon-icons.com/icons2/70/PNG/512/outlook_14099.png" alt="" /></a>
+        <a href="mailto:guarderiasullivan@hotmail.com" target="_blanck"><img className={style.itemNet} src="https://cdn.icon-icons.com/icons2/70/PNG/512/outlook_14099.png" alt="outlook" /></a>
+        {/* <a href="mailto:guarderiasullivan@hotmail.com" target="_blanck"><img className={style.itemNet} src="https://cdn.icon-icons.com/icons2/70/PNG/512/outlook_14099.png" alt="outlook" /></a> */}
   </div>;
 };
 

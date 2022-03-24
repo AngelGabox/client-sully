@@ -1,7 +1,7 @@
 .navContainer{
     display: flex; 
     align-items: center; 
-    justify-content: space-between; 
+    justify-content: space-around; 
     flex-direction: row;
     height: 15vh;
     padding: '5px 0px';
@@ -14,7 +14,7 @@
   .el{
       color: white;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 30px;
       padding-left: 30px;
       text-decoration: none;
       font-size: 18px;

@@ -1,5 +1,4 @@
 .home{
-    height: 300rem;
     background-color: lightblue;
 }
 .sullivan {
@@ -11,10 +10,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 0px 0px 20px 0px;
-    clip-path: circle(50% at 43% 50%);
-    -webkit-box-shadow: inset -1px 28px 69px 25px rgba(0,0,0,1);
-    -moz-box-shadow: inset -1px 28px 69px 25px rgba(0,0,0,1);
-    box-shadow: inset -1px 28px 69px 25px rgba(0, 0, 0, 0.5);
 }
 
 .mision{
