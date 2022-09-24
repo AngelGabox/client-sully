@@ -1,15 +1,3 @@
-:root{
-  --color: white;
-  --color-green: green;
-  --color-one: rgb(148, 221, 245);
-  --color-two: rgb(41, 185, 233);
-  --color-three: rgb(0, 117, 156);
-  --background-color-one: rgb(165, 216, 233);
-  --border-radius: 30px;
-}
-*{
-  margin: 0px;
-}
 .container{
   display: flex;
   align-items: center;
@@ -25,7 +13,7 @@
 50%{background-position:100% 22%}
 100%{background-position:0% 79%}
 }
-@-moz-keyframes AnimationName {
+/* @-moz-keyframes AnimationName {
 0%{background-position:0% 79%}
 50%{background-position:100% 22%}
 100%{background-position:0% 79%}
@@ -34,7 +22,7 @@
 0%{background-position:0% 79%}
 50%{background-position:100% 22%}
 100%{background-position:0% 79%}
-}
+} */
 
 
 .btn {

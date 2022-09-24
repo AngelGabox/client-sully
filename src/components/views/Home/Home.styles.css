@@ -6,7 +6,7 @@
     width: 200px ;
     position:absolute;
     padding: 10px 0px 0px 0px;
-    background-image: url('../../img/sullivan.png');
+    background-image: url('../../../img/sullivan.png');
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 0px 0px 20px 0px;
@@ -17,7 +17,7 @@
     width: 90vh ;
     position: absolute;
     left: 30%;
-    background-image: url('../../img/mision.png');
+    background-image: url('../../../img/mision.png');
     background-size: contain;
     background-repeat: no-repeat;
 }

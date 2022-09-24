@@ -1,18 +1,61 @@
 import React from 'react'
+import { AnimatePresence, motion } from "framer-motion"
 import { Route, Routes } from 'react-router-dom'
-import LandingPage from '../components/views/LandingPage'
-import Home from '../components/views/Home'
-import Register from '../components/Register/Register'
+//  Components
+import LandingPage from '../components/views/LandingPage/LandingPage'
+import Home from '../components/views/Home/Home'
+import  Login from '../components/views/auth/Login/Login'
+import Register from '../components/views/auth/Register/Register'
 
+
+const pageTransition = {
+    in: {
+        opacity: 1,
+    },
+    out: {
+        opacity: 0,
+    },
+}
 const index = () => {
     return (
-        <div className='divIndex'>
+        <AnimatePresence>
             <Routes>
-                <Route exact path='/' element={<LandingPage/>}/> 
-                <Route exact path='/main' element={<Home/>}/>
+                <Route exact path='/' element={
+                    <motion.div
+                    className="page"
+                    initial="out"
+                    animate="in"
+                    exit="out"
+                    variants={pageTransition}
+                    >
+                        <LandingPage/>
+                    </motion.div>
+                }/> 
+                <Route exact path='/home' element={
+                    <motion.div
+                    className="page"
+                    initial="out"
+                    animate="in"
+                    exit="out"
+                    variants={pageTransition}
+                    >
+                        <Home/>
+                    </motion.div>
+                }/>
+                <Route exact path='/login' element={
+                    <motion.div
+                    className="page"
+                    initial="out"
+                    animate="in"
+                    exit="out"
+                    variants={pageTransition}
+                    >
+                        <Login/>
+                    </motion.div>
+                }/>
                 <Route exact path='/register' element={<Register/>}/>
             </Routes>
-        </div>
+        </AnimatePresence>
     )
 }
 
