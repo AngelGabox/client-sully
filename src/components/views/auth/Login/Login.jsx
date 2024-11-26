@@ -1,115 +1,103 @@
-import React from "react";
+import React, {useState} from "react";
 import { useFormik } from "formik";
 import { useNavigate, Link } from "react-router-dom";
 import * as Yup from "yup";
 import {swal} from "../../../../utils/swal"
 import "../Auth.styles.css";
+import { loginRoute } from "../../../../utils/APIRoutes";
 
-const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 const Login = () => {
     const navigate = useNavigate();
     const initialValues = {
-        fullname: "",
         email: "",
-        password: "",
-        confirm: "",
+        password: ""
     };
     const required = "* Es obligatorio completarlo";
 
     const validationSchema = () =>
       Yup.object().shape({
-            fullname: Yup.string()
-                .min(30, "Muy corto")
+            email: Yup.string()
+                .email('email invalido')
                 .required(required),
             password: Yup.string().required(required),
       });
     
       
-      const onSubmit = () => {
-        const { userName, password } = values;
-    
-        fetch(`${API_ENDPOINT}auth/login`, {
+    const onSubmit = () => {
+        const { email, password } = values;
+        fetch(`${loginRoute}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-                userName,
+        },
+        body: JSON.stringify({
+                email,
                 password,
             }),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.status_code === 200) {
-                    localStorage.setItem("token", data?.result?.token);
-                    localStorage.setItem("userName", data?.result?.user.userName);
-                    navigate("/", { replace: true });
-                } else {
-                    swal();
-                }
-            });
-        };
-        const formik = useFormik({ initialValues, validationSchema, onSubmit });
-    
-        const { handleSubmit, handleChange, errors, touched, handleBlur, values } = formik;
-        return (
-        <>
-            <div className="auth">
-                <form onSubmit={handleSubmit}>
-                    {/* FullName */}
-                    <div>
-                        <label htmlFor="">Nombre Completo</label>
+        .then(async(response) => {
+            const data = await response.json()
+            return{
+                status: response.status,
+                user: data
+            }
+        })
+        .then((data) => {
+            if (data.status=== 200) {
+                const user = sessionStorage.setItem("user", JSON.stringify(data.user));
+                navigate("/home", { replace: true });
+            } else {
+                swal(data);
+            }
+        });
+    };
+    const formik = useFormik({ initialValues, validationSchema, onSubmit });
+
+    const { handleSubmit, handleChange, errors, touched, handleBlur, values } = formik;
+    return (
+    <>
+        <div className="auth">
+            <form onSubmit={handleSubmit}>
+                <span className='form--title'>Nueva cuenta</span>
+                {/* Email */}
+                <div className='container__box'>
+                    <div className='container--input'>
                         <input 
                             type="text" 
-                            name="fullname"
-                            onChange={handleChange}
-                            value={values.password}
-                            onBlur={handleBlur} 
-                        />
-                        {errors.fullname && touched.fullname && (<div>{errors.fullname}</div>)}
-                    </div>
-                    {/* Email */}
-                    <div>
-                        <label htmlFor="">Correo</label>
-                        <input 
-                            type="email" 
                             name="email"
                             onChange={handleChange}
-                            value={values.password}
-                            onBlur={handleBlur} 
+                            value={values.email}
+                            onBlur={handleBlur}
+                            required={values.email? "" :"required"} 
                         />
-                        {errors.email && touched.email && (<div>{errors.email}</div>)}
+                        <span>Correo</span>
+                        <i></i>
                     </div>
-                    {/* Password */}
-                    <div>
-                        <label htmlFor="">Contraseña</label>
+                    {errors.email && touched.email && (<div className='error'>{errors.email}</div>)}
+                </div>
+                {/* Password */}
+                <div className='container__box'>
+                    <div className='container--input'>
                         <input 
                             type="password" 
                             name="password"
                             onChange={handleChange}
                             value={values.password}
-                            onBlur={handleBlur} 
+                            onBlur={handleBlur}
+                            required={values.password? "" :"required"} 
                         />
-                        {errors.password && touched.password && (<div>{errors.password}</div>)}
+                        <span>Contraseña</span>
+                        <i></i>
                     </div>
-                    {/* Comfirm Password */}
-                    <div>
-                        <label htmlFor="">Contraseña</label>
-                        <input 
-                            type="password" 
-                            name="confirm"
-                            onChange={handleChange}
-                            value={values.password}
-                            onBlur={handleBlur} 
-                        />
-                        {errors.confirm && touched.confirm && (<div>{errors.confirm}</div>)}
-                        </div>
-                        <button type="submit">Enviar</button>
-                        <Link to='/register'>Registrame</Link>
-                </form>
-            </div>
-        </>
+                    {errors.password && touched.password && (<div className='error'>{errors.password}</div>)}
+                </div>
+                    <button type="submit">Enviar</button>
+                    {/* <div style={{height: "10px", width: "10px", background: "#000"}} onClick={()=> dispatch(getUser(localStorage.getItem("user")))}></div> */}
+                    <Link to='/register'>Registrame</Link>
+            </form>
+        </div>
+    </>
     )
 }
 

@@ -1,8 +1,8 @@
 import Swal from "sweetalert2"
 
-export const swal = () =>
+export const swal = (data) =>
    Swal.fire({
-      title: "Credenciales inválidas",
+      title: data? data : "Credenciales inválidas",
       text: "Por favor introduzca credenciales válidas",
       confirmButtonText: "Aceptar",
       width: "400px",

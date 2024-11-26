@@ -4,7 +4,7 @@ import './LandingPage.styles.css'
 
 const LandingPage = () => {
     const navigate = useNavigate();
-    const handleOnClick = () => navigate('/main')
+    const handleOnClick = () => navigate('/home')
     return (
         <div class='container'> 
             <section class='section uno'>

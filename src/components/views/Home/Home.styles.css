@@ -12,7 +12,8 @@
     border-radius: 0px 0px 20px 0px;
 }
 
-.mision{
+.mision
+{
     height: 90vh;
     width: 90vh ;
     position: absolute;
@@ -21,4 +22,3 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
-

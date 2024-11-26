@@ -11,7 +11,10 @@ const Register = () => {
 	const navigate = useNavigate();
 	const [ infoEmail, setEmail ] = useState(false)
 	const initialValues = {
-		fullname: "",
+		firstName: "",
+		secondLastname: "",
+		lastname: "",
+		secondLastname: "",
 		email: "",
 		password: "",
 		confirm: "",
@@ -20,8 +23,17 @@ const Register = () => {
 
 	const validationSchema = () =>
 		Yup.object().shape({
-				fullname: Yup.string()
-					.min(15, "Muy corto!")
+				firstName: Yup.string("only letter")
+				// .when("firstName", {
+				// 	is: value => value.has
+				// })
+				.strict()
+				.required(required),
+				secondName: Yup.string()
+					.required(required),
+				lastname: Yup.string()
+					.required(required),
+				secondLastname: Yup.string()
 					.required(required),
 				email: Yup.string()
 					.email('email invalido!') 
@@ -39,26 +51,32 @@ const Register = () => {
 
 
 	const onSubmit = () => {
-		const { userName, password } = values;
-
-		fetch(`${API_ENDPOINT}auth/login`, {
+		const { firstName, secondName, lastname, secondLastname, email, password} = values;
+		const rol = 'student'
+		fetch(`${API_ENDPOINT}user/register`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-				userName,
+				firstName,
+				secondName,
+				lastname,
+				secondLastname,	
+				email,
 				password,
+				rol
 			}),
 		})
 		.then((response) => response.json())
 		.then((data) => {
+			console.log(data)
 			if (data.status_code === 200) {
-				localStorage.setItem("token", data?.result?.token);
-				localStorage.setItem("userName", data?.result?.user.userName);
-				navigate("/", { replace: true });
+				localStorage.setItem("isLogged", data?.isLogged);
+				localStorage.setItem("user", data?.user);
+				navigate("/home", { replace: true });
 			} else {
-				swal();
+				swal(data);
 			}
 		});
 	};
@@ -68,23 +86,71 @@ const Register = () => {
 	return (
 		<>
 			<div className="auth">
-				<h2>Resgistrar me</h2>
 				<form onSubmit={handleSubmit}>
-					{/* FullName */}
+					<span className='form--title'>Nueva cuenta</span>
+					{/* FirstName*/}
 					<div className='container__box'>
 						<div className='container--input'>	
 							<input 
 								type="text" 
-								name="fullname"
+								name="firstName"
 								onChange={handleChange}
-								value={values.fullname}
+								value={values.firstName}
 								onBlur={handleBlur}
-								required={values.fullname? "" :"required"}
+								required={values.firstName? "" :"required"}
 							/>
-							<span >Nombre Completo</span>
+							<span >Primer Nombre</span>
 							<i></i>
 						</div>
-						{errors.fullname && touched.fullname && (<div className='error'>{errors.fullname}</div>)}
+						{errors.firstName && touched.firstName && (<div className='error'>{errors.firstName}</div>)}
+					</div>
+					{/*SecondName */}
+					<div className='container__box'>
+						<div className='container--input'>	
+							<input 
+								type="text" 
+								name="secondName"
+								onChange={handleChange}
+								value={values.secondName}
+								onBlur={handleBlur}
+								required={values.secondName? "" :"required"}
+							/>
+							<span >Segundo Nombre</span>
+							<i></i>
+						</div>
+						{errors.secondName && touched.secondName && (<div className='error'>{errors.secondName}</div>)}
+					</div>
+					{/* Lastname*/}
+					<div className='container__box'>
+						<div className='container--input'>	
+							<input 
+								type="text" 
+								name="lastname"
+								onChange={handleChange}
+								value={values.lastname}
+								onBlur={handleBlur}
+								required={values.lastname? "" :"required"}
+							/>
+							<span >Primer Apellido</span>
+							<i></i>
+						</div>
+						{errors.lastname && touched.lastname && (<div className='error'>{errors.lastname}</div>)}
+					</div>
+					{/* Second Lastname*/}
+					<div className='container__box'>
+						<div className='container--input'>	
+							<input 
+								type="text" 
+								name="secondLastname"
+								onChange={handleChange}
+								value={values.secondLastname}
+								onBlur={handleBlur}
+								required={values.secondLastname? "" :"required"}
+							/>
+							<span >Segundo Nombre</span>
+							<i></i>
+						</div>
+						{errors.secondLastname && touched.secondLastname && (<div className='error'>{errors.secondLastname}</div>)}
 					</div>
 					{/* Email */}
 					<div className='container__box'>
@@ -92,11 +158,7 @@ const Register = () => {
 							<input 
 								type="text" 
 								name="email"
-								onChange={(e) => {
-									handleChange(e)
-									setEmail(e.target.value)
-									console.log(infoEmail)
-								}}
+								onChange={handleChange}
 								value={values.email}
 								onBlur={handleBlur}
 								required={values.email? "" :"required"} 
@@ -133,7 +195,7 @@ const Register = () => {
 								onBlur={handleBlur}
 								required={values.confirm? "" :"required"} 
 								/>
-							<span> Confirm contraseña</span>
+							<span> Confirmar contraseña</span>
 							<i></i>
 						</div>
 						{errors.confirm && touched.confirm && (<div className='error'>{errors.confirm}</div>)}
